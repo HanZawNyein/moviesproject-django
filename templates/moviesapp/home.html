@@ -1,127 +1,25 @@
 {% extends 'moviesapp/components/base.html' %}
+{% load static %}
 {% block title %}Home{% endblock title %}
 {% block content %}
-    <div class="row row-cols-1 row-cols-md-6 g-4">
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
+    {% if movies %}
 
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
+        <div class="row row-cols-1 row-cols-md-6 g-4">
+            {% for movie in movies %}
+                <div class="col">
+                    <div class="card">
+                        <img src="{% if movie.movie_of_images.all.0.image %}/media/{{ movie.movie_of_images.all.0.image }}{% else %}{% static 'moviesapp/no_image_available.jpeg' %}{% endif %}"
+                             class="card-img-top" alt="no_image_available.jpeg">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ movie.name }}</h5>
+                            <p class="card-text">{{ movie.production_date }}</p>
+                        </div>
+                        <a href="{{ movie.get_absolute_url }}" class="stretched-link"></a>
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BYmQ4NmE1OWItNTg4OC00NjRiLWJjZTctM2Y1MDFlMWFjNjdjXkEyXkFqcGdeQXVyNzE4Mzc1NTY@._V1_.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">2022</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% else %}
+        <div class="alert alert-success" role="alert">videos are not found</div>
+    {% endif %}
 {% endblock content %}

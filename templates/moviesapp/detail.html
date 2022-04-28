@@ -1,0 +1,47 @@
+{% extends 'moviesapp/components/base.html' %}
+{% load static %}
+{% block title %}{{ movie.name }}{% endblock title %}
+{% block content %}
+    <div class="row p-3">
+        <div class="col">
+            <img src="/media/{{ movie.movie_of_images.all.0.image }}" width="200px" height="200px">
+        </div>
+        <div class="col">
+            <h5>{{ movie.name }}</h5>
+            <p>{{ movie.type }}</p>
+            <p>{{ movie.production_date }}</p>
+        </div>
+    </div>
+    <hr/>
+    {{ movie.review|linebreaks }}
+    <div class="row scrollmenu">
+        {% for movieofimages in movie.movie_of_images.all %}
+            {% if movie.movie_of_images.all.0 != movieofimages %}
+                <div class="col">
+                    <img src="/media/{{ movieofimages.image }}" width="200px" height="200px">
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <hr/>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Drive Name</th>
+                <th scope="col">Link</th>
+                <th scope="col">Download</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for movie_drive in movie.movie_of_drives.all %}
+                <tr>
+                    <td>{{ movie_drive.drive_type }}</td>
+                    <td>{{ movie_drive.drive_link }}</td>
+                    <td><a class="btn btn-primary" href="{{ movie_drive.drive_link }}">Dowload</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <h1>Related Movies</h1>
+{% endblock content %}

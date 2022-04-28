@@ -1,4 +1,15 @@
 from django.db import models
+from django.urls import reverse
+
+
+class MovieManager(models.Manager):
+    def get_queryset(self):
+        return super(MovieManager, self).get_queryset().filter(type='movies').order_by("-created")
+
+
+class SeriesManager(models.Manager):
+    def get_queryset(self):
+        return super(SeriesManager, self).get_queryset().filter(type='series').order_by("-created")
 
 
 # Create your models here.
@@ -11,10 +22,20 @@ class Movie(models.Model):
     )
     type = models.CharField(max_length=50, choices=MOVIES_TYPE)
     review = models.TextField()
+    production_date = models.IntegerField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    objects = models.Manager()
+    movies = MovieManager()
+    series = SeriesManager()
 
     def __str__(self) -> str:
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('movies_app:details',
+                       args=[self.type, self.slug, self.created.year,
+                             self.created.month, self.created.day, self.created.second])
 
 
 class DriveName(models.Model):
