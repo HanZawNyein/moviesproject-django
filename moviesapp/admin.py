@@ -1,5 +1,5 @@
 from django.contrib import admin
-from moviesapp.models import Movie, MovieImage, Drive, DriveName, Comment
+from moviesapp.models import Movie, MovieImage, Drive, DriveName, Comment, Category
 
 
 # Register your models here.
@@ -37,3 +37,10 @@ class MovieAdmin(admin.ModelAdmin):
     list_display = ('movie_name', 'created')
     list_filter = ('movie_name', 'created')
     ordering = ('created',)
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ('name',)

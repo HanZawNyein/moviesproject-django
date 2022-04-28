@@ -12,6 +12,17 @@ class SeriesManager(models.Manager):
         return super(SeriesManager, self).get_queryset().filter(type='series').order_by("-created")
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=250)
+    slug = models.SlugField()
+
+    def get_absolute_url(self):
+        return reverse('movies_app:movie_list_by_category', args=[self.slug])
+
+    def __str__(self):
+        return self.name
+
+
 # Create your models here.
 class Movie(models.Model):
     name = models.CharField(max_length=500)
@@ -24,7 +35,7 @@ class Movie(models.Model):
     review = models.TextField()
     production_date = models.IntegerField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
-
+    category = models.ManyToManyField(Category, related_name="category_of_movies")
     objects = models.Manager()
     movies = MovieManager()
     series = SeriesManager()

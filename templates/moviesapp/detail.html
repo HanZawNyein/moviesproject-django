@@ -4,12 +4,19 @@
 {% block content %}
     <div class="row p-3">
         <div class="col">
-            <img src="/media/{{ movie.movie_of_images.all.0.image }}" width="200px" height="200px">
+            <img src="{% if movie.movie_of_images.all.0.image %}/media/{{ movie.movie_of_images.all.0.image }}{% else %}{% static 'moviesapp/no_image_available.jpeg' %}{% endif %}"
+                 width="200px" height="200px">
         </div>
         <div class="col">
             <h5>{{ movie.name }}</h5>
             <p>{{ movie.type }}</p>
             <p>{{ movie.production_date }}</p>
+            {% for category in movie.category.all %}
+                <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+                {% if category != movie.category.all.last %}
+                    ,
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
     <hr/>

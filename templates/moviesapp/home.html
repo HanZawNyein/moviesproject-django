@@ -22,4 +22,5 @@
     {% else %}
         <div class="alert alert-success" role="alert">videos are not found</div>
     {% endif %}
+    {% include "moviesapp/components/pagination.html" with page=movies %}
 {% endblock content %}
