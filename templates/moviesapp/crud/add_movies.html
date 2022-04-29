@@ -1,0 +1,35 @@
+{% extends 'moviesapp/components/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Add Movies{% endblock title %}
+{% block content %}
+    <h1 class="mx-4 mt-3">Add Movies</h1>
+    <form method="POST" class="form-row mt-3 mb-3" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for movie in movie_form %}
+            <div class="row container mt-3">
+                <div class="col-md-1">{{ movie.label }}</div>
+                <div class="col">{{ movie|add_class:"form-control" }}</div>
+            </div>
+        {% endfor %}
+        {{ movie_image_form.management_form }}
+        {% for movie_image in movie_image_form %}
+            <div class="row container mt-3">
+                <div class="col-md-1">{{ movie_image.image.label }}</div>
+                <div class="col">{{ movie_image.image|add_class:"form-control"|attr:"onchange='showPreview(event);'" }}</div>
+            </div>
+        {% endfor %}
+        {{ movie_drive.management_form }}
+        {% for movie_drive in movie_drive_name %}
+            <div class="row container mt-3">
+                <div class="col-md-1">{{ movie_drive.drive_link.label }}</div>
+                <div class="col-md-2">{{ movie_drive.drive_type|add_class:"form-control" }}</div>
+                <div class="col">{{ movie_drive.drive_link|add_class:"form-control" }}</div>
+            </div>
+        {% endfor %}
+        <div class="mt-3 row container d-flex justify-content-center">
+            <button class="col btn btn-primary m-3" type="submit">add post</button>
+            <a class="col btn btn-secondary m-3" href="{% url 'movies_app:home' %}">back</a>
+        </div>
+    </form>
+{% endblock content %}

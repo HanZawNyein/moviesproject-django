@@ -14,5 +14,9 @@ urlpatterns = [
 
     #    authentication
     path('login/',views.user_login,name="user_login"),
-    path('logout/',views.user_logout,name="user_logout")
+    path('logout/',views.user_logout,name="user_logout"),
+
+    #crud
+    path('add_movies/', views.add_movies, name="add_movies"),
+
 ]

@@ -33,7 +33,7 @@ class Movie(models.Model):
     )
     type = models.CharField(max_length=50, choices=MOVIES_TYPE)
     review = models.TextField()
-    production_date = models.IntegerField(blank=True)
+    production_date = models.IntegerField(blank=True,default=2022)
     created = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category, related_name="category_of_movies")
     objects = models.Manager()
