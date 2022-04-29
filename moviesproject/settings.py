@@ -37,7 +37,7 @@ INSTALLED_APPS = [
 
     # apps
     'moviesapp.apps.MoviesappConfig',
-    # 'widget_tweaks',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

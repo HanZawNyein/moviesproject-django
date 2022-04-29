@@ -64,6 +64,7 @@ class Drive(models.Model):
     movie_name = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="movie_of_drives")
     drive_link = models.URLField(max_length=200)
     drive_type = models.ForeignKey(DriveName, on_delete=models.CASCADE)
+    series_name = models.CharField(max_length=500,blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:

@@ -36,7 +36,9 @@
             <thead>
             <tr>
                 <th scope="col">Drive Name</th>
-                <th scope="col">Link</th>
+                {% if movie.type == "series" %}
+                    <th scope="col">Series & Season</th>
+                {% endif %}
                 <th scope="col">Download</th>
             </tr>
             </thead>
@@ -44,7 +46,7 @@
             {% for movie_drive in movie.movie_of_drives.all %}
                 <tr>
                     <td>{{ movie_drive.drive_type }}</td>
-                    <td>{{ movie_drive.drive_link }}</td>
+                    <td>{{ movie_drive.series_name }}</td>
                     <td><a class="btn btn-primary" href="{{ movie_drive.drive_link }}">Dowload</a></td>
                 </tr>
             {% endfor %}
