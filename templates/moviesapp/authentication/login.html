@@ -1,0 +1,21 @@
+{% extends "moviesapp/components/base.html" %}
+{% load widget_tweaks %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <h1>Log-in</h1>
+    <p>Please, use the following form to login:</p>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {% for form in login_form %}
+        {{ form.label }}
+        {{ form|add_class:"form-control mb-3" }}
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">{{ form.errors }}</div>
+        {% endif %}
+    {% endfor %}
+        <p><input class="btn btn-primary mb-3" type="submit" value="Login"></p>
+    </form>
+{% endblock %}

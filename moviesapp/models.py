@@ -40,6 +40,9 @@ class Movie(models.Model):
     movies = MovieManager()
     series = SeriesManager()
 
+    class Meta:
+        ordering = ('-created',)
+
     def __str__(self) -> str:
         return self.name
 

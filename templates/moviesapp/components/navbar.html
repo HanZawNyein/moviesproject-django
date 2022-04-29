@@ -9,37 +9,40 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link {% if request.path == MOVIES %}active{% endif %}" aria-current="page"
-                       href="{% url 'movies_app:movies_type' 'movies' %}">Movies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if request.path == SERIES %}active{% endif %}"
-                       href="{% url 'movies_app:movies_type' 'series' %}">Series</a>
-                </li>
+            {% if  request.user.is_authenticated %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == MOVIES %}active{% endif %}" aria-current="page"
+                           href="{% url 'movies_app:movies_type' 'movies' %}">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == SERIES %}active{% endif %}"
+                           href="{% url 'movies_app:movies_type' 'series' %}">Series</a>
+                    </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-expanded="false">Category</a>
-                    <ul class="dropdown-menu mt-2">
-                        {% if categories %}
-                            {% for category in categories %}
-                                <li><a class="dropdown-item"
-                                       href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
-                            {% endfor %}
-                        {% endif %}
-                    </ul>
-                </li>
-            </ul>
-            <form class="d-flex" method="POST">
-                {% csrf_token %}
-                <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" formaction="/search/" type="submit">Search</button>
-            </form>
-
-
-            <ul class="navbar-nav mx-3">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                           aria-expanded="false">Category</a>
+                        <ul class="dropdown-menu mt-2">
+                            {% if categories %}
+                                {% for category in categories %}
+                                    <li><a class="dropdown-item"
+                                           href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" method="POST">
+                    {% csrf_token %}
+                    <input name="search" class="form-control me-2" type="search" placeholder="Search"
+                           aria-label="Search">
+                    <button class="btn btn-outline-success" formaction="/search/" type="submit">Search</button>
+                </form>
+            {% endif %}
+        </div>
+        <ul class="navbar-nav mx-3">
+            {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {% if request.path == MOVIES %}active{% endif %}"
                        data-bs-toggle="dropdown" href="% url 'movies_app:movies_type' 'movies' %}" role="button"
@@ -48,11 +51,14 @@
                              src="{% static 'moviesapp/no_image_available.jpeg' %}"/>
                         User</a>
                     <ul class="dropdown-menu mt-2">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li><a class="dropdown-item" href="{% url 'movies_app:user_logout' %}">Logout</a></li>
                     </ul>
                 </li>
-            </ul>
-        </div>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            {% endif %}
+        </ul>
     </div>
 </nav>

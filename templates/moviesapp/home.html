@@ -3,7 +3,6 @@
 {% block title %}Home{% endblock title %}
 {% block content %}
     {% if movies %}
-
         <div class="row row-cols-1 row-cols-md-6 g-4">
             {% for movie in movies %}
                 <div class="col">
@@ -22,5 +21,9 @@
     {% else %}
         <div class="alert alert-success" role="alert">videos are not found</div>
     {% endif %}
-    {% include "moviesapp/components/pagination.html" with page=movies %}
+
+    <div class="container d-flex justify-content-center">
+        {% include "moviesapp/components/pagination.html" with page=movies %}
+    </div>
+
 {% endblock content %}
