@@ -1,0 +1,22 @@
+{% load static %}
+<div class="container mt-3 mb-3">
+    {% if movies %}
+    <div class="row row-cols-1 row-cols-md-6 g-4">
+        {% for movie in movies %}
+            <div class="col">
+                <div class="card">
+                    <img src="{% if movie.movie_of_images.all.0.image %}/media/{{ movie.movie_of_images.all.0.image }}{% else %}{% static 'moviesapp/no_image_available.jpeg' %}{% endif %}"
+                         class="card-img-top" alt="no_image_available.jpeg">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ movie.name }}</h5>
+                        <p class="card-text">{{ movie.production_date }}</p>
+                    </div>
+                    <a href="{{ movie.get_absolute_url }}" class="stretched-link"></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-success" role="alert">videos are not found</div>
+{% endif %}
+</div>

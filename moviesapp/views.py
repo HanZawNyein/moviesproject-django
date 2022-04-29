@@ -48,9 +48,12 @@ def detail(request, movie_type, slug, year, month, day, second):
     movie = get_object_or_404(Movie, slug=slug, type=movie_type, created__year=year, created__month=month,
                               created__day=day, created__second=second)
     categories = Category.objects.all()
+    movie_category_ids = movie.category.values_list('id',flat=True)
+    related_movies = Movie.objects.filter(category__in=movie_category_ids).exclude(id=movie.id).order_by('-created')
     context = {
         "movie": movie,
-        "categories": categories
+        "categories": categories,
+        "related_movies":related_movies
     }
     return render(request=request, template_name="moviesapp/detail.html", context=context)
 
