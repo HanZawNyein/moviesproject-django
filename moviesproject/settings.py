@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", "Some Random String")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", True)
+DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
     # apps
     'moviesapp.apps.MoviesappConfig',
     'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [
@@ -136,6 +140,6 @@ LOGOUT_URL = 'logout/'
 # }
 
 TELEGRAM = {
-    'bot_token': '5312212820:AAGGjXj6uvaPJpY_Lq_06VTRfK2Nuqf9UCU',
-    'channel_name': 'aggamulti'
+    'bot_token': os.environ.get("BOT_TOKEN"),
+    'channel_name': os.environ.get("CHANNEL_NAME")
 }
