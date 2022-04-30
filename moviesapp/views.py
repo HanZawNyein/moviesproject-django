@@ -30,7 +30,7 @@ def home(request, type=None, slug=None):
         all_movies = Category.objects.get(slug=slug).category_of_movies.all()
 
     # pagination
-    paginator = Paginator(all_movies, 2)  # 3 posts in each page
+    paginator = Paginator(all_movies, 12)  # 3 posts in each page
     page = request.GET.get('page')
     try:
         all_movies = paginator.page(page)
